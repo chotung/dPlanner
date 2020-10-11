@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose')
 const { Schema } = mongoose;
 
 const DateSchema = new Schema({
@@ -12,7 +12,10 @@ const DateSchema = new Schema({
   //   votes: Number,
   //   favs: Number
   // },
-  name: String,
+  name: {
+    type: String,
+    required: true
+  },
   activity: String,
   location: String,
   createdAt: { type: Date, default: Date.now },
