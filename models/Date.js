@@ -16,6 +16,9 @@ const DateSchema = new Schema({
   activity: String,
   location: String,
   createdAt: { type: Date, default: Date.now },
-  time: Date 
+  time: Date,
+  meta: {
+    comments: String
+  } 
 });
 module.exports = date = mongoose.model('date', DateSchema)
