@@ -1,20 +1,23 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default {
   // Gets all posts
-  getPosts: function () {
-    return axios.get("/api/posts");
+  getDates: function () {
+    return axios.get('/api/dates');
   },
   // Gets the post with the given id
-  getPost: function (id) {
-    return axios.get("/api/posts/" + id);
+  getDate: function (id) {
+    return axios.get('/api/dates/' + id);
   },
   // Deletes the post with the given id
-  deletePost: function (id) {
-    return axios.delete("/api/posts/" + id);
+  deleteDate: function (id) {
+    return axios.delete('/api/dates/' + id);
+  },
+  editDate: function (id, editData) {
+    return axios.put('/api/dates/' + id, editData);
   },
   // Saves a post to the database
-  savePost: function (postData) {
-    return axios.post("/api/posts", postData);
-  }
+  saveDate: function (postData) {
+    return axios.post('/api/dates', postData);
+  },
 };

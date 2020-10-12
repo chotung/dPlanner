@@ -1,10 +1,10 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const DateSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   activity: String,
   location: String,
@@ -12,7 +12,7 @@ const DateSchema = new Schema({
   time: String,
   partnerName: String,
   meta: {
-    comments: String
-  } 
+    comments: String,
+  },
 });
-module.exports = date = mongoose.model('date', DateSchema)
+module.exports = date = mongoose.model('date', DateSchema);
