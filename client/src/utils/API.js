@@ -6,7 +6,7 @@ export default {
     return axios.get('/api/dates');
   },
   // Gets the post with the given id
-  getDate: function (id) {
+  getADate: function (id) {
     return axios.get('/api/dates/' + id);
   },
   // Deletes the post with the given id
