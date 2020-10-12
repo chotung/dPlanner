@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import axios from 'axios'
 import './App.css';
+import { StoreProvider } from "./utils/GlobalState";
 
-function App() {
+const App = () => {
+  // useEffect(() => {
+  //   // effect
+  //   axios.get('/api/date')
+  //   .then(res => console.log(res))
+
+  //   return () => {
+  //     // cleanup
+  //   }
+  // }, [])
+
   return (
-    <div className="App">
-    </div>
+    <StoreProvider>
+      <div className="App">
+      </div>
+    </StoreProvider>
   );
 }
 
