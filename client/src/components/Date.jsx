@@ -2,11 +2,14 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Beach from '../assets/beach.jpg';
-import Row from 'react-bootstrap/esm/Row';
+import Row from 'react-bootstrap/Row';
+import { useStoreContext } from '../utils/GlobalState';
+
 
 const Date = (props) => {
+	
 	const { name, partnerName, activity, location, time, meta } = props.date;
-	console.log(props.date)
+	const { removeDate } = props
   return (
     <Card>
       <Card.Img variant="top" src={Beach} alt="some picture" />
@@ -23,7 +26,7 @@ const Date = (props) => {
           <Button className="flex-grow-1 mr-1" variant="primary">
             Go somewhere
           </Button>
-          <Button className="flex-grow-1 ml-1" variant="danger">
+          <Button onClick={() => removeDate(props.date._id)} className="flex-grow-1 ml-1" variant="danger">
             X
           </Button>
         </Row>

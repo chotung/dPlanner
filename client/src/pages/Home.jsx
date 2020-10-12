@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 
 import { useStoreContext } from '../utils/GlobalState';
-import { LOADING, UPDATE_DATES } from '../utils/actions';
+import { LOADING, UPDATE_DATES, REMOVE_DATE} from '../utils/actions';
 import Date from '../components/Date';
 import API from '../utils/API';
 const Home = () => {
@@ -15,23 +15,36 @@ const Home = () => {
     dispatch({ type: LOADING });
     API.getDates()
       .then((results) => {
-        dispatch({ type: UPDATE_DATES, dates: results.data });
+				dispatch({ type: UPDATE_DATES, dates: results.data });
       })
       .catch((err) => console.log(err));
 	};
-	const stableDispatch = useCallback(getAllDates, []);
 	
+	const removeDate = (id) => {
+		API.deleteDate(id)
+			.then(() => {
+				dispatch({
+					type: REMOVE_DATE,
+					_id: id,
+				});
+			})
+			.catch((err) => console.log(err));
+	}
+	
+	
+	const stableDispatchGetDates = useCallback(getAllDates, []);
+	// const stableDispatchRemoveDate = useCallback(removeDate, [])
 
   useEffect(() => {
-		stableDispatch()
-  }, [stableDispatch]);
+		stableDispatchGetDates()
+  }, [stableDispatchGetDates]);
 
   const renderDates = () => {
     const { dates } = state;
     return dates.map((date) => {
       return (
         <Col key={date._id}>
-          <Date date={date} />
+          <Date date={date} removeDate={removeDate} />
         </Col>
       );
     });
@@ -44,7 +57,7 @@ const Home = () => {
         </Container>
       </Jumbotron>
       <Container fluid>
-        <Row>{state.dates.length !== 0 ? renderDates() : 'Loading...'}</Row>
+        <Row>{state.dates.length !== 0 ? renderDates() : null }</Row>
       </Container>
     </>
   );

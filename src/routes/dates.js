@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
   try {
     const dates = await Date.find({});
     if (dates.length === 0) {
-      res.json({ msg: 'there are no dates' });
+      res.json([]);
     } else {
       res.json(dates);
     }
