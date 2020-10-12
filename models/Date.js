@@ -9,7 +9,8 @@ const DateSchema = new Schema({
   activity: String,
   location: String,
   createdAt: { type: Date, default: Date.now },
-  time: Date,
+  time: String,
+  partnerName: String,
   meta: {
     comments: String
   } 

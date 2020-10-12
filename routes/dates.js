@@ -2,11 +2,10 @@ const express = require('express')
 const router = express.Router()
 const Date = require('../models/Date')
 
-// GET A DATE
+// GET A DATES
 router.get('/', async (req, res) => {
   try {
     const dates = await Date.find({})
-    console.log(dates.length)
     if(dates.length === 0) {
       res.json({msg: 'there are no dates'})
     } else {
@@ -16,13 +15,25 @@ router.get('/', async (req, res) => {
     console.error({ msg: 'no dates'})
   }
 })
+// GET A SINGLE DATE
+router.get('/:id', async (req, res) => {
+  const { id } = req.params
+  try {
+    const singleDate = await Date.findById(id)
+    res.json(singleDate)
+  } catch (error) {
+    console.error({ msg: 'no dates' })
+  }
+})
 
-// CREATE A NEW DATE?
+
+// CREATE A NEW DATE
 router.post('/', async (req, res) => {
-  const { name, activity, location, time, meta } = req.body
+  const { name, partnerName, activity, location, time, meta } = req.body
   try {
     const newDate = await new Date({
       name,
+      partnerName,
       activity,
       location,
       time,
@@ -34,6 +45,28 @@ router.post('/', async (req, res) => {
     console.error({ msg: 'could not create' })
   }
 })
+
+// EDIT DATE
+router.put('/:id', async (req, res) => {
+  const { id } = req.params
+  const { name, partnerName, activity, location, time, meta } = req.body
+  const updates = {
+    name,
+    partnerName,
+    activity,
+    location,
+    time,
+    meta
+  }
+  try {
+    const singleDate = await Date.findByIdAndUpdate(id, updates)
+    res.json(singleDate)
+  } catch (error) {
+    console.error({ msg: 'no dates' })
+  }
+})
+
+
 // ADMIN PURPOSES
 // DELETE ALL DATES
 router.delete('/delete', async (req, res) => {
