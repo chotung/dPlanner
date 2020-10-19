@@ -30,6 +30,10 @@ const Home = () => {
 			})
 			.catch((err) => console.log(err));
 	}
+	const updateDate = (date) => {
+		console.log('updating date')
+		console.log(date.name)
+	}
 	
 	
 	const stableDispatchGetDates = useCallback(getAllDates, []);
@@ -43,8 +47,8 @@ const Home = () => {
     const { dates } = state;
     return dates.map((date) => {
       return (
-        <Col key={date._id}>
-          <Date date={date} removeDate={removeDate} />
+        <Col key={date._id} className='date-columns mb-1' >
+          <Date date={date} removeDate={removeDate} update={updateDate} />
         </Col>
       );
     });
@@ -57,7 +61,7 @@ const Home = () => {
         </Container>
       </Jumbotron>
       <Container fluid>
-        <Row>{state.dates.length !== 0 ? renderDates() : null }</Row>
+        <Row md={4}>{state.dates.length !== 0 ? renderDates() : null }</Row>
       </Container>
     </>
   );
