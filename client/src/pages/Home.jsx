@@ -30,10 +30,13 @@ const Home = () => {
 			})
 			.catch((err) => console.log(err));
 	}
-	const updateDate = (date) => {
-		console.log('updating date')
-		console.log(date.name)
+	const editDate = (date, edit, setEdit) => {
+		setEdit(!edit)
 	}
+	const updateDates = (e) => {
+		e.preventDefault()
+	}
+	
 	
 	
 	const stableDispatchGetDates = useCallback(getAllDates, []);
@@ -48,11 +51,13 @@ const Home = () => {
     return dates.map((date) => {
       return (
         <Col key={date._id} className='date-columns mb-1' >
-          <Date date={date} removeDate={removeDate} update={updateDate} />
+          <Date date={date} removeDate={removeDate} editDate={editDate} updateDates={updateDates}/>
         </Col>
       );
     });
-  };
+	};
+	
+
   return (
     <>
       <Jumbotron fluid className="bg-light">

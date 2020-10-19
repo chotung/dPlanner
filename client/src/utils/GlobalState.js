@@ -26,7 +26,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         dates: [...action.dates],
-        loading: false,
+				loading: false,
       };
 
     case ADD_DATE:
@@ -92,7 +92,8 @@ const StoreProvider = ({ value = [], ...props }) => {
       },
     },
     // favorites: [],
-    loading: false,
+		loading: false,
+		editing: false
   });
 
   return <Provider value={[state, dispatch]} {...props} />;
