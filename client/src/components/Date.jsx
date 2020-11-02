@@ -10,7 +10,7 @@ import { useState } from 'react';
 
 
 const cardStyles = {
-	height: '500px'
+	minHeight: '500px'
 }
 
 const Date = (props) => {
@@ -26,6 +26,20 @@ const Date = (props) => {
 		meta
 	})
 	const updateOnChange = (e) => {
+		const val = e.target.value
+		if(e.target.name === 'comments') {
+			setCard({
+				...card,
+				meta: {
+					comments: val
+				}
+			})
+		} else {
+			setCard({ 
+				...card,
+				[e.target.name] : val
+			})
+		}
 		// should update the store
 	}
 	
@@ -64,16 +78,25 @@ const Date = (props) => {
         </Card.Body>
       ) : (
         <Card.Body>
-					<Form onSubmit={updateDates}>
-						<Form.Group>
-							<Form.Control onChange={updateOnChange} type="text" value={name}/>
-						</Form.Group>
-						<Button type="submit">Confirm Edits</Button>
-						<Button
-							onClick={() => editDate(props.date, edit, setEdit)}
-						>Exit Without Saving</Button>
-					</Form>
-				</Card.Body>
+          <Form onSubmit={updateDates}>
+            <Form.Group>
+              <Form.Label>Name</Form.Label>
+              <Form.Control onChange={updateOnChange} name="name" type="text" value={card.name} />
+              <Form.Label>Date's Name</Form.Label>
+              <Form.Control onChange={updateOnChange} name="partnerName" type="text" value={card.partnerName} />
+              <Form.Label>Activity</Form.Label>
+              <Form.Control onChange={updateOnChange} name="activity" type="text" value={card.activity} />
+              <Form.Label>Location</Form.Label>
+              <Form.Control onChange={updateOnChange} name="location" type="text" value={card.location} />
+              <Form.Label>Time</Form.Label>
+              <Form.Control onChange={updateOnChange} name="time" type="text" value={card.time} />
+              <Form.Label>Comments</Form.Label>
+              <Form.Control onChange={updateOnChange} name="comments" type="text" value={card.meta.comments} />
+            </Form.Group>
+            <Button type="submit">Confirm Edits</Button>
+            <Button onClick={() => editDate(props.date, edit, setEdit)}>Exit Without Saving</Button>
+          </Form>
+        </Card.Body>
       )}
     </Card>
   );

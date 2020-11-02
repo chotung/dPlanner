@@ -29,7 +29,9 @@ const Home = () => {
 				});
 			})
 			.catch((err) => console.log(err));
+		getAllDates()
 	}
+	
 	const editDate = (date, edit, setEdit) => {
 		setEdit(!edit)
 	}
@@ -66,7 +68,7 @@ const Home = () => {
         </Container>
       </Jumbotron>
       <Container fluid>
-        <Row md={4}>{state.dates.length !== 0 ? renderDates() : null }</Row>
+        <Row md={4}>{state.dates.length !== 0 ? renderDates() : (<div>{`You Have No Dates` + ' :( ' +  `let's get you some`}</div>) }</Row>
       </Container>
     </>
   );
