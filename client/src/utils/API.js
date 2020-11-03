@@ -12,7 +12,8 @@ export default {
   // Deletes the post with the given id
   deleteDate: function (id) {
     return axios.delete('/api/dates/delete/' + id);
-  },
+	},
+	// Edits the date given id
   editDate: function (id, editData) {
     return axios.put('/api/dates/' + id, editData);
   },

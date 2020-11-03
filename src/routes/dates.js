@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Date = require('../models/Date');
 
-// GET A DATES
+// GET ALL DATES
 router.get('/', async (req, res) => {
   try {
     const dates = await Date.find({});
@@ -59,7 +59,8 @@ router.put('/:id', async (req, res) => {
   };
   try {
     const singleDate = await Date.findByIdAndUpdate(id, updates);
-    res.json(singleDate);
+    const sendAll = await Date.find({});
+    res.json(sendAll);
   } catch (error) {
     console.error({ msg: 'no dates' });
   }

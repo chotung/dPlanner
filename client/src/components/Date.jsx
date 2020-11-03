@@ -14,10 +14,11 @@ const cardStyles = {
 }
 
 const Date = (props) => {
-	const { name, partnerName, activity, location, time, meta } = props.date;
+	const { name, partnerName, activity, location, time, meta, _id } = props.date;
 	const { removeDate, editDate, updateDates } = props
 	const [edit, setEdit] = useState(false)
 	const [card, setCard] = useState({
+		_id,
 		name,
 		partnerName,
 		activity,
@@ -78,20 +79,40 @@ const Date = (props) => {
         </Card.Body>
       ) : (
         <Card.Body>
-          <Form onSubmit={updateDates}>
+          <Form onSubmit={(e) => updateDates(e, card, edit, setEdit)}>
             <Form.Group>
               <Form.Label>Name</Form.Label>
               <Form.Control onChange={updateOnChange} name="name" type="text" value={card.name} />
               <Form.Label>Date's Name</Form.Label>
-              <Form.Control onChange={updateOnChange} name="partnerName" type="text" value={card.partnerName} />
+              <Form.Control
+                onChange={updateOnChange}
+                name="partnerName"
+                type="text"
+                value={card.partnerName}
+              />
               <Form.Label>Activity</Form.Label>
-              <Form.Control onChange={updateOnChange} name="activity" type="text" value={card.activity} />
+              <Form.Control
+                onChange={updateOnChange}
+                name="activity"
+                type="text"
+                value={card.activity}
+              />
               <Form.Label>Location</Form.Label>
-              <Form.Control onChange={updateOnChange} name="location" type="text" value={card.location} />
+              <Form.Control
+                onChange={updateOnChange}
+                name="location"
+                type="text"
+                value={card.location}
+              />
               <Form.Label>Time</Form.Label>
               <Form.Control onChange={updateOnChange} name="time" type="text" value={card.time} />
               <Form.Label>Comments</Form.Label>
-              <Form.Control onChange={updateOnChange} name="comments" type="text" value={card.meta.comments} />
+              <Form.Control
+                onChange={updateOnChange}
+                name="comments"
+                type="text"
+                value={card.meta.comments}
+              />
             </Form.Group>
             <Button type="submit">Confirm Edits</Button>
             <Button onClick={() => editDate(props.date, edit, setEdit)}>Exit Without Saving</Button>

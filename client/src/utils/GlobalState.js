@@ -25,7 +25,7 @@ const reducer = (state, action) => {
     case UPDATE_DATES:
       return {
         ...state,
-        dates: [...action.dates],
+				dates: [...action.dates],
 				loading: false,
       };
 
@@ -39,7 +39,7 @@ const reducer = (state, action) => {
     case REMOVE_DATE:
       return {
         ...state,
-        posts: state.dates.filter((dates) => {
+        dates: state.dates.filter((dates) => {
           return dates._id !== action._id;
         }),
       };

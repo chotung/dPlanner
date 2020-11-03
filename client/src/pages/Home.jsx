@@ -35,11 +35,18 @@ const Home = () => {
 	const editDate = (date, edit, setEdit) => {
 		setEdit(!edit)
 	}
-	const updateDates = (e) => {
+
+	const updateDates = (e, editedInfo, edit, setEdit) => { 
 		e.preventDefault()
+		dispatch({ type: LOADING})
+		API.editDate(editedInfo._id, editedInfo)
+			.then((results) => {
+				dispatch({ type: UPDATE_DATES, dates: results.data });
+				setEdit(!edit)
+			})
+			.catch((err) => console.log(err))
+
 	}
-	
-	
 	
 	const stableDispatchGetDates = useCallback(getAllDates, []);
 	// const stableDispatchRemoveDate = useCallback(removeDate, [])
